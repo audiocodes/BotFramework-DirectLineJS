@@ -61,7 +61,10 @@ beforeEach(() => {
   jest.spyOn(console, 'warn').mockImplementation(() => {});
 });
 
-afterEach(() => jest.restoreAllMocks());
+afterEach(() => {
+  jest.restoreAllMocks();
+  jest.clearAllMocks();
+});
 
 test('should not call disconnectHandler()', () => expect(disconnectionHandler).toBeCalledTimes(0));
 
