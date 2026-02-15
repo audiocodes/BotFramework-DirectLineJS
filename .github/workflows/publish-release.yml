@@ -2,7 +2,7 @@ name: Publish release on push tag
 
 on:
   push:
-    tags: ['v*']
+    tags: ['v*-ac']
 
 jobs:
   build-and-draft:
