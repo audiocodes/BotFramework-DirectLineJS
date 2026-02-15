@@ -54,7 +54,7 @@ test.each([['with stable connection'], ['without stable connection']])(
     );
 
     // THEN: Should made the connection.
-    expect(onUpgrade).toBeCalledTimes(1);
+    expect(onUpgrade).toHaveBeenCalledTimes(1);
 
     // ---
 
@@ -89,11 +89,11 @@ test.each([['with stable connection'], ['without stable connection']])(
 
     if (scenario === 'with stable connection') {
       // THEN: Should reconnect immediately.
-      expect(onUpgrade).toBeCalledTimes(2);
+      expect(onUpgrade).toHaveBeenCalledTimes(2);
       expect(onUpgrade.mock.results[1].value - disconnectTime).toBeLessThan(3000);
     } else {
       // THEN: Should reconnect after 3-15 seconds.
-      expect(onUpgrade).toBeCalledTimes(2);
+      expect(onUpgrade).toHaveBeenCalledTimes(2);
       expect(onUpgrade.mock.results[1].value - disconnectTime).toBeGreaterThanOrEqual(3000);
       expect(onUpgrade.mock.results[1].value - disconnectTime).toBeLessThanOrEqual(15000);
     }

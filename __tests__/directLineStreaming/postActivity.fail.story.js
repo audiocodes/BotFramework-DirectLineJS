@@ -67,7 +67,7 @@ test('should send activity', async () => {
     .subscribe(postActivityObserver);
 
   // THEN: Should send through Web Socket.
-  await waitFor(() => expect(onWebSocketSendMessage).toBeCalled());
+  await waitFor(() => expect(onWebSocketSendMessage).toHaveBeenCalled());
 
   // THEN: Should fail the call.
   await waitFor(() =>

@@ -66,7 +66,7 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-test('should not call disconnectHandler()', () => expect(disconnectionHandler).toBeCalledTimes(0));
+test('should not call disconnectHandler()', () => expect(disconnectionHandler).toHaveBeenCalledTimes(0));
 
 describe('initially online', () => {
   beforeEach(() => {
@@ -80,7 +80,7 @@ describe('initially online', () => {
       beforeEach(() => client.disconnect());
 
       // Both sender/receiver will call `onConnectionDisconnected`, so it is calling it twice.
-      test('should call disconnectHandler() twice', () => expect(disconnectionHandler).toBeCalledTimes(2));
+      test('should call disconnectHandler() twice', () => expect(disconnectionHandler).toHaveBeenCalledTimes(2));
 
       describe('when offline', () => {
         beforeEach(() => {
@@ -89,7 +89,7 @@ describe('initially online', () => {
 
         // After disconnected() is called, there should be no extra calls for offline.
         test('should have no extra calls to disconnectHandler()', () =>
-          expect(disconnectionHandler).toBeCalledTimes(2));
+          expect(disconnectionHandler).toHaveBeenCalledTimes(2));
       });
     });
 
@@ -99,14 +99,14 @@ describe('initially online', () => {
       });
 
       // Both sender/receiver will call `onConnectionDisconnected`, so it is calling it twice.
-      test('should call disconnectHandler() twice', () => expect(disconnectionHandler).toBeCalledTimes(2));
+      test('should call disconnectHandler() twice', () => expect(disconnectionHandler).toHaveBeenCalledTimes(2));
 
       describe('when disconnect() is called', () => {
         beforeEach(() => client.disconnect());
 
         // After the signal is aborted, there should be no extra calls for calling disconnect().
         test('should have no extra calls to disconnectHandler()', () =>
-          expect(disconnectionHandler).toBeCalledTimes(2));
+          expect(disconnectionHandler).toHaveBeenCalledTimes(2));
       });
     });
   });

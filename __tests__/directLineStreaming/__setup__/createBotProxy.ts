@@ -1,6 +1,5 @@
 import { createProxyMiddleware, responseInterceptor } from 'http-proxy-middleware';
 import { createServer } from 'http';
-import { match } from 'path-to-regexp';
 import WebSocket, { WebSocketServer } from 'ws';
 import express from 'express';
 
@@ -33,8 +32,6 @@ type CreateBotProxyReturnValue = {
   directLineStreamingURL: string;
   directLineURL: string;
 };
-
-const matchDirectLineStreamingProtocol = match('/.bot/', { decode: decodeURIComponent, end: false });
 
 export default function createBotProxy(init?: CreateBotProxyInit): Promise<CreateBotProxyReturnValue> {
   const onUpgrade = init?.onUpgrade || ((req, socket, head, next) => next(req, socket, head, () => {}));
@@ -119,7 +116,7 @@ export default function createBotProxy(init?: CreateBotProxyInit): Promise<Creat
 
           const requestURL = req.url || '';
 
-          const isDirectLineStreaming = !!matchDirectLineStreamingProtocol(requestURL);
+          const isDirectLineStreaming = requestURL === '/.bot' || requestURL.startsWith('/.bot/');
 
           if (isDirectLineStreaming && !streamingBotURL) {
             console.warn('Cannot proxy /.bot/ requests without specifying "streamingBotURL".');

@@ -1,6 +1,6 @@
 
 import createServer from './createServer';
-import hasResolved from 'has-resolved';
+import { hasResolved } from 'has-resolved';
 
 test('GET /once.txt should return 200 OK', async () => {
   const { dispose, port, promises } = await createServer({

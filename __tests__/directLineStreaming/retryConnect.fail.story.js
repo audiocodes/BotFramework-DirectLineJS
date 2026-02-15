@@ -38,7 +38,7 @@ test('reconnect fail should stop', async () => {
   directLine.activity$.subscribe(activityObserver);
 
   // THEN: Server should observe one Web Socket connection.
-  await waitFor(() => expect(onUpgrade).toBeCalledTimes(1));
+  await waitFor(() => expect(onUpgrade).toHaveBeenCalledTimes(1));
 
   // THEN: Should observe "Uninitialized" -> "Connecting" -> "Online".
   await waitFor(
@@ -74,7 +74,7 @@ test('reconnect fail should stop', async () => {
   closeAllWebSocketConnections();
 
   // THEN: Server should observe three Web Socket connections.
-  await waitFor(() => expect(onUpgrade).toBeCalledTimes(3), { timeout: 5000 });
+  await waitFor(() => expect(onUpgrade).toHaveBeenCalledTimes(3), { timeout: 5000 });
 
   // THEN: Should not wait before reconnecting the first time.
   //       This is because the connection has been established for more than 1 minute and is considered stable.
@@ -110,7 +110,7 @@ test('reconnect fail should stop', async () => {
   });
 
   // THEN: Server should observe 3 connections again.
-  await waitFor(() => expect(onUpgrade).toBeCalledTimes(6), { timeout: 5000 });
+  await waitFor(() => expect(onUpgrade).toHaveBeenCalledTimes(6), { timeout: 5000 });
 
   // THEN: Should not wait before reconnecting.
   //       This is because calling reconnect() should not by delayed.

@@ -10,5 +10,5 @@ module.exports = {
   // - uuid
   // Jest default is ["/node_modules/", "\\.pnp\\.[^\\\/]+$"].
   // https://jestjs.io/docs/configuration#transformignorepatterns-arraystring
-  transformIgnorePatterns: ['\\/node_modules\\/(?!(botframework-streaming|p-defer|uuid)\\/)', '\\.pnp\\.[^\\/]+$']
+  transformIgnorePatterns: ['\\/node_modules\\/(?!(botframework-streaming|get-port|p-defer|uuid)\\/)', '\\.pnp\\.[^\\/]+$']
 };
