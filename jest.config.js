@@ -1,5 +1,6 @@
 module.exports = {
-  setupFiles: ['core-js/actual/promise/with-resolvers'],
+  clearMocks: true,
+  setupFiles: ['core-js/actual/promise/with-resolvers', '<rootDir>/__tests__/setup/jestPolyfills.js'],
   setupFilesAfterEnv: ['./__tests__/directLineStreaming/__setup__/expect/activityContaining.ts'],
   testEnvironmentOptions: {
     customExportConditions: ['node']
@@ -13,5 +14,5 @@ module.exports = {
   // - uuid
   // Jest default is ["/node_modules/", "\\.pnp\\.[^\\\/]+$"].
   // https://jestjs.io/docs/configuration#transformignorepatterns-arraystring
-  transformIgnorePatterns: ['\\/node_modules\\/(?!(botframework-streaming|uuid)\\/)', '\\.pnp\\.[^\\/]+$']
+  transformIgnorePatterns: ['\\/node_modules\\/(?!(botframework-streaming|get-port|uuid)\\/)', '\\.pnp\\.[^\\/]+$']
 };

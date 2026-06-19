@@ -1,7 +1,9 @@
 /** @jest-environment ./__tests__/setup/jsdomEnvironmentWithProxy */
 
 import 'dotenv/config';
-import 'global-agent/bootstrap';
+import { bootstrap } from 'global-agent';
+
+bootstrap();
 
 import { EventTarget, getEventAttributeValue, setEventAttributeValue } from 'event-target-shim';
 import nock from 'nock';

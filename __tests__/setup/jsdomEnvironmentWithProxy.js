@@ -1,4 +1,6 @@
-require('global-agent/bootstrap');
+const { bootstrap } = require('global-agent');
+
+bootstrap();
 
 // To use proxy, SET GLOBAL_AGENT_HTTP_PROXY=http://localhost:8888
 

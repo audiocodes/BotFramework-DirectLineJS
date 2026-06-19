@@ -2,7 +2,7 @@
 
 import 'dotenv/config';
 
-import onErrorResumeNext from 'on-error-resume-next';
+import { onErrorResumeNext } from 'on-error-resume-next';
 
 import { timeouts } from './constants.json';
 import * as createDirectLine from './setup/createDirectLine';

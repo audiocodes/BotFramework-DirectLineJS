@@ -40,7 +40,7 @@ test('connect fail should signal properly', async () => {
   directLine.activity$.subscribe(activityObserver);
 
   // THEN: Should try to connect 3 times.
-  await waitFor(() => expect(onUpgrade).toBeCalledTimes(3), { timeout: 5_000 });
+  await waitFor(() => expect(onUpgrade).toHaveBeenCalledTimes(3), { timeout: 5_000 });
 
   // THEN: Should not wait before connecting the first time.
   expect(onUpgrade.mock.results[0].value - connectTime).toBeLessThan(3000);
@@ -73,7 +73,7 @@ test('connect fail should signal properly', async () => {
   });
 
   // THEN: Should try to reconnect 3 times again.
-  await waitFor(() => expect(onUpgrade).toBeCalledTimes(6));
+  await waitFor(() => expect(onUpgrade).toHaveBeenCalledTimes(6));
 
   // THEN: Should not wait before reconnecting.
   //       This is because calling reconnect() should not by delayed.
