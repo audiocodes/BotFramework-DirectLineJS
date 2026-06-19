@@ -6,6 +6,9 @@ import 'global-agent/bootstrap';
 import { EventTarget, getEventAttributeValue, setEventAttributeValue } from 'event-target-shim';
 import nock from 'nock';
 import { onErrorResumeNext } from 'on-error-resume-next/async';
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/observable/of';
 
 import { DirectLine } from '../src/directLine';
 
@@ -32,33 +35,18 @@ describe('Unhappy path', () => {
   afterEach(() => unsubscribes.forEach(fn => onErrorResumeNext(fn)));
 
   describe('broken Web Socket', () => {
+    const conversationResponse = {
+      conversationId: '123',
+      token: '456',
+      streamUrl: 'wss://not-exist-domain'
+    };
+
     let numErrors;
     let numReconnections;
 
     beforeEach(async () => {
       numErrors = 0;
       numReconnections = 0;
-
-      nock('https://directline.botframework.com')
-        .persist()
-        .post(uri => uri.startsWith('/v3/directline/conversations'))
-        .reply(
-          200,
-          JSON.stringify({
-            conversationId: '123',
-            token: '456',
-            streamUrl: 'wss://not-exist-domain'
-          })
-        )
-        .get(uri => uri.startsWith('/v3/directline/conversations'))
-        .reply(
-          200,
-          JSON.stringify({
-            conversationId: '123',
-            token: '456',
-            streamUrl: 'wss://not-exist-domain'
-          })
-        );
 
       corsReply(
         nock('https://directline.botframework.com')
@@ -104,6 +92,7 @@ describe('Unhappy path', () => {
 
     test('should reconnect only once for every error', async () => {
       const directLine = new DirectLine({
+        ajax: () => Observable.of({ response: conversationResponse }),
         token: '123',
         webSocket: true
       });
