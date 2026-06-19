@@ -69,6 +69,6 @@ jobs:
         run: |
           echo Cannot publish production version
           exit 1
-      - run: npm publish --access public --tag ${{ github.ref_name }} `ls *.tgz`
-      - name: Generate job summary
-        run: echo "NPM package has been published to https://npmjs.com/package/${{ steps.get-version.outputs.package-name }}/v/${{ steps.get-version.outputs.version }}." > $GITHUB_STEP_SUMMARY
+      # - run: npm publish --access public --tag ${{ github.ref_name }} `ls *.tgz`
+      # - name: Generate job summary
+        # run: echo "NPM package has been published to https://npmjs.com/package/${{ steps.get-version.outputs.package-name }}/v/${{ steps.get-version.outputs.version }}." > $GITHUB_STEP_SUMMARY
